@@ -23,16 +23,16 @@ dbconnect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors(
-	//jo bhi request apko is origin se aari h means frontend se aari h apko usko entertain krna h
 	{
 		origin:"http://localhost:3000",
+		methods: ["GET", "POST", "PUT", "DELETE"],
 		credentials:true, 
 	}
 )); 
 
 app.use(
 	fileUpload({ 
-		useTempFiles:true,                     //this middeare is for fileupload in local media;
+		useTempFiles:true,
 		tempFileDir:"/tmp",
 	})
 )

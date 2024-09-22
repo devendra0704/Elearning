@@ -33,10 +33,10 @@ export default function CourseBuilderForm() {
 
   // handle form submission
   const onSubmit = async (data) => {
-    // console.log(data)
+    // console.log(data);
     setLoading(true)
 
-    let result
+    let result=null;
 
     if (editSectionName) {
       result = await updateSection(
@@ -140,6 +140,7 @@ export default function CourseBuilderForm() {
           )}
         </div>
       </form>
+      {console.log("checkkkk.....",course.courseContent)}
       {course.courseContent.length > 0 && (
         <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
       )}

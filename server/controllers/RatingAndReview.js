@@ -6,8 +6,8 @@ import  {  mongoose } from "mongoose";
 //createRating
  export const createRating = async (req, res) => {
     try{
-        const userId = req.user.id;                                                   //get user id
-        const {rating, review, courseId} = req.body;                                 //fetchdata from req body
+        const userId = req.user.id;  //get user id
+        const {rating, review, courseId} = req.body; //fetchdata from req body
         const courseDetails = await Course.findOne({_id:courseId, studentsEnrolled:{$elemMatch: {$eq: userId} },  });    //check if user is enrolled or not
                                     
         if(!courseDetails){
@@ -16,15 +16,15 @@ import  {  mongoose } from "mongoose";
                 message:'Student is not enrolled in the course',
             });
         }
-        const alreadyReviewed = await RatingAndReview.findOne({user:userId,  course:courseId,});       //check if user already reviewed the course                                
-                                             
+        const alreadyReviewed = await RatingAndReview.findOne({user:userId,  course:courseId,});
+
         if(alreadyReviewed) {
                     return res.status(403).json({
                         success:false,
                         message:'Course is already reviewed by the user',
                     });
                 }
-        //create an entry for ratingandreview in RatingAndReview folder in DB;
+
         const ratingReview = await RatingAndReview.create({
                                         rating, review, 
                                         course:courseId,
@@ -38,7 +38,7 @@ import  {  mongoose } from "mongoose";
                                     },
                                     {new: true});
     
-        return res.status(200).json({                               //return response
+        return res.status(200).json({
             success:true,
             message:"Rating and Review created Successfully",
             ratingReview,
@@ -57,11 +57,11 @@ import  {  mongoose } from "mongoose";
 //getAverageRating
  export const getAverageRating = async (req, res) => {
     try {
-            const courseId = req.body.courseId;                             //get course ID
+            const courseId = req.body.courseId;
             
             const result = await RatingAndReview.aggregate([
                 {
-                    $match:{course: new mongoose.Types.ObjectId(courseId),},        // it find all entry in which id of courses is matched with courseId in RatingAndReview models;
+                    $match:{course: new mongoose.Types.ObjectId(courseId),},       
                 },
                 {
                     $group:{ _id:null,  averageRating: { $avg: "$rating"},}         //all entry grouped into single grouped due to (_id:null) and then find averageRating;

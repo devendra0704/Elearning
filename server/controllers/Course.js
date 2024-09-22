@@ -14,13 +14,13 @@ export const createCourse = async (req, res) => {
     const userId = req.user.id
     let { courseName, courseDescription, whatYouWillLearn, price, tag: _tag, category, status, instructions: _instructions, } = req.body
 
-    const thumbnail = req.files.thumbnailImage                         // Get thumbnail image from request files
+    const thumbnail = req.files.thumbnailImage
 
-    const tag = JSON.parse(_tag)                                    //Convert the tag and instructions from stringified Array to Array
+    const tag = JSON.parse(_tag) //Convert the tag and instructions from stringified Array to Array
     const instructions = JSON.parse(_instructions)
 
     // Check if any of the required fields are missing
-    if (!courseName || !courseDescription || !whatYouWillLearn || !price || !tag.length || !thumbnail || !category || !instructions.length) {
+    if (!courseName || !courseDescription || !whatYouWillLearn || !price || !tag.length || !thumbnail  || !instructions.length) {
       return res.status(400).json({ success: false, message: "All Fields are Mandatory", })
     }
     if (!status || status === undefined) {
@@ -112,7 +112,7 @@ export const editCourse = async (req, res) => {
       }
     }
 
-    await course.save()                                     // save the course;
+    await course.save()
 
     const updatedCourse = await Course.findOne({ _id: courseId, })
       .populate({
@@ -224,7 +224,7 @@ export const getFullCourseDetails = async (req, res) => {
   try {
     const { courseId } = req.body
     const userId = req.user.id
-    const courseDetails = await Course.findOne({ _id: courseId, })
+    const courseDetails = await Course.findOne({ _id: courseId })
       .populate({
         path: "instructor",
         populate: {

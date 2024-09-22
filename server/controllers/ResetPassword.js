@@ -7,25 +7,26 @@ import User from "../models/User.js";
 //resetPasswordToken :- it generate token and send URL with Token to the user;
 export const resetPasswordToken = async (req, res) => {
     try {
-        const email = req.body.email;                              //get email from req body
-        const user = await User.findOne({ email: email });           //check user for this email,find user which email is matched to this email;
-        if (!user) {                                                //if there is no any user for this email;
+        const email = req.body.email;
+        const user = await User.findOne({ email: email });
+        if (!user) {
             return res.json({ success: false, message: 'Your Email is not registered' });
         }
 
-        const token = crypto.randomBytes(20).toString("hex");                          //generate token and we add expiration time in that token and then we add that token
-        const updatedDetails = await User.findOneAndUpdate(          // URL so the URL which will be sent to user to reset password will expire after certain time;
+        const token = crypto.randomBytes(20).toString("hex");
+
+        const updatedDetails = await User.findOneAndUpdate(
             { email: email },
             {
                 token: token,
                 resetPasswordExpires: Date.now() + 5 * 60 * 60,
             },
-            { new: true });                  // {new:true} added because it return updated object so updatedDetails contain updated details;
+            { new: true });
 
-        const url = `http://localhost:3000/update-password/${token}`                              //create url
-        await mailSender(email, "Password Reset Link", `Your Link for email verification is ${url}. Please click this url to reset your password.`);   //send mail containing the url
+        const url = `http://localhost:3000/update-password/${token}`
+        await mailSender(email, "Password Reset Link", `Your Link for email verification is ${url}. Please click this url to reset your password.`);
 
-        return res.json({                                                                         //return response
+        return res.json({
             success: true,
             message: 'Email sent successfully, please check email and change pwd',
         });

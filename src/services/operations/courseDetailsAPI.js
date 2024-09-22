@@ -83,13 +83,14 @@ export const fetchCourseCategories = async () => {
 // add the course details
 export const addCourseDetails = async (data, token) => {
   let result = null
+
   const toastId = toast.loading("Loading...")
-  console.log("data",data);
+  // console.log("data",data,token);
   try {
     const response = await apiConnector("POST", CREATE_COURSE_API, data, {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
-    })
+    },{withcredential:true})
     console.log("CREATE COURSE API RESPONSE............", response)
     if (!response?.data?.success) {
       throw new Error("Could Not Add Course Details")
@@ -328,7 +329,7 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
   } catch (error) {
     console.log("COURSE_FULL_DETAILS_API API ERROR............", error)
     result = error.response.data
-    // toast.error(error.response.data.message);
+    toast.error(error.response.data.message);
   }
   toast.dismiss(toastId)
   //   dispatch(setLoading(false));

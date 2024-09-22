@@ -80,7 +80,7 @@ export default function CourseInformationForm() {
 
   //   handle next button click
   const onSubmit = async (data) => {
-    // console.log(data)
+    // console.log("122324.......",data.courseTitle);
 
     if (editCourse) {
       // const currentValues = getValues()
@@ -147,13 +147,17 @@ export default function CourseInformationForm() {
     formData.append("instructions", JSON.stringify(data.courseRequirements))
     formData.append("thumbnailImage", data.courseImage)
     setLoading(true)
-    const result = await addCourseDetails(formData, token)
+    const result = await addCourseDetails(formData, token);
+
+    // console.log("form.....",formData);
     if (result) {
       dispatch(setStep(2))
       dispatch(setCourse(result))
     }
     setLoading(false)
   }
+
+  // console.log("token......",token);
 
   return (
     <form
