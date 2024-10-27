@@ -24,10 +24,10 @@ export default function RenderCartCourses() {
               className="h-[120px] w-[220px] rounded-lg object-cover"
             />
             <div className="flex flex-col space-y-1">
-              <p className="text-lg font-medium text-richblack-5">
+              <p className="text-lg font-medium text-[#2C2C2C]">
                 {course?.courseName}
               </p>
-              <p className="text-sm text-richblack-300">
+              <p className="text-sm text-[#2C2C2C]">
                 {course?.category?.name}
               </p>
               <div className="flex items-center gap-2">
@@ -41,7 +41,7 @@ export default function RenderCartCourses() {
                   emptyIcon={<FaStar />}
                   fullIcon={<FaStar />}
                 />
-                <span className="text-richblack-400">
+                <span className="text-[#2C2C2C]">
                   {course?.ratingAndReviews?.length} Ratings
                 </span>
               </div>

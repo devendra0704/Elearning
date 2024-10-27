@@ -74,8 +74,8 @@ export const deleteSection = async (req, res) => {
 		await Section.findByIdAndDelete(sectionId);
 
 		//find the updated course and return 
-		const course = await Course.findById(courseId).populate({                               //here there is no use of const course , its only store updated course;
-			path:"courseContent",                                                               // if you also write without  "const course = " then it also work;
+		const course = await Course.findById(courseId).populate({ 
+			path:"courseContent",
 			populate: {
 				path: "subSection"
 			}

@@ -6,14 +6,16 @@ import dotenv from "dotenv";
 import OTP from "../models/OTP.js";
 import Profile from "../models/Profile.js";
 import toast from "react-hot-toast";
+import mailSender from "../utils/mailSender.js";
+import passwordUpdated  from "../mail/templates/passwordUpdate.js";
 dotenv.config();
 
 export const sendOTP = async (req, res) => {
-    try {    //fatch email form request body
+    try {
         const { email } = req.body;
-        //check if user already exist
+        
         const checkUserPresent = await User.findOne({ email });
-        //if user already exist ,then return a response
+        
         if (checkUserPresent) {
             return res.status(401).json({
                 success: true,
@@ -40,7 +42,7 @@ export const sendOTP = async (req, res) => {
         const otpPayload = { email, otp };
         //creat an entry for otp
         const otpBody = await OTP.create(otpPayload);
-        console.log(otpBody);
+        console.log("otpbody...",otpBody);
         //return response successfully
         res.status(200).json({
             success: true,
@@ -122,7 +124,7 @@ export const signUp = async (req, res) => {
             conctNumber,
             password: hashedPassword, accountType,
             additionalDetails: profileDetails._id,
-            image: `https://api.decebear.com/5.x/initials/svg?seed=${firstName}${lastName}`
+            image: `https://api.dicebear.com/9.x/initials/svg?seed=${firstName}${lastName}`
         })
         // return response
         return res.status(200).json({
@@ -214,6 +216,7 @@ export const changePassword = async (req, res) => {
     try {
         const userDetails = await User.findById(req.user.id);                       
         const { oldPassword, newPassword, confirmNewPassword } = req.body;
+        // console.log("pass..",req.body);
 
         const isPasswordMatch = await bcrypt.compare(oldPassword, userDetails.password); 
 
@@ -221,16 +224,18 @@ export const changePassword = async (req, res) => {
             return res.status(401).json({ success: false, message: "The password is incorrect" });
         }
 
-        if (newPassword !== confirmNewPassword) {                             // Match new password and confirm new password
-            return res.status(401).json({ success: false, message: "The password and confirm password does not match" });
-        }
+        // if (newPassword !== confirmNewPassword) {                           
+        //     return res.status(401).json({ success: false, message: "The password and confirm password does not match" });
+        // }
 
         const encryptedPassword = await bcrypt.hash(newPassword, 10);             // Update password
         const updatedUserDetails = await User.findByIdAndUpdate(req.user.id, { password: encryptedPassword }, { new: true });
         // find user by id and then update password = encryptedPassword , here if you "const updatedUserDetails =" does not wirte this then also it not affect;
 
-        try {                                                          // Send notification email , here passwordUpdated is template of email which is send to user;
-            const emailResponse = await mailSender(updatedUserDetails.email, passwordUpdated(updatedUserDetails.email, `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`));
+        console.log("updatedUserDetails ",updatedUserDetails);
+
+        try {
+            const emailResponse = await mailSender(updatedUserDetails.email,"Password updated" ,passwordUpdated(updatedUserDetails.email, `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`));
             console.log("Email sent successfully:", emailResponse.response);
         }
         catch (error) {

@@ -67,7 +67,7 @@ export const createCourse = async (req, res) => {
     // Add the new course to the Categories
     const categoryDetails2 = await Category.findByIdAndUpdate({ _id: category }, { $push: { courses: newCourse._id, }, }, { new: true })
 
-    res.status(200).json({                                      // Return the new course and a success message
+    res.status(200).json({
       success: true,
       data: newCourse,
       message: "Course Created Successfully",
@@ -86,6 +86,8 @@ export const createCourse = async (req, res) => {
 // Edit Course Details
 export const editCourse = async (req, res) => {
   try {
+    console.log("editcourse..",req.body);
+
     const { courseId } = req.body
     const updates = req.body
     const course = await Course.findById(courseId)
@@ -94,12 +96,17 @@ export const editCourse = async (req, res) => {
       return res.status(404).json({ error: "Course not found" })
     }
 
+    console.log("test111....");
+
     // If Thumbnail Image is found, update it
     if (req.files) {
       const thumbnail = req.files.thumbnailImage
       const thumbnailImage = await uploadImageToCloudinary(thumbnail, process.env.FOLDER_NAME)
       course.thumbnail = thumbnailImage.secure_url
     }
+
+
+    console.log("test222....");
 
     // Update only the fields that are present in the request body
     for (const key in updates) {
@@ -112,7 +119,13 @@ export const editCourse = async (req, res) => {
       }
     }
 
+
+    console.log("test333....");
+
+
     await course.save()
+
+    console.log("test444....");
 
     const updatedCourse = await Course.findOne({ _id: courseId, })
       .populate({
@@ -131,12 +144,19 @@ export const editCourse = async (req, res) => {
       })
       .exec()
 
+      console.log("updatedCourse....",updatedCourse)
+
     res.json({
       success: true,
       message: "Course updated successfully",
       data: updatedCourse,
     })
+
+    console.log("test333....");
+    
   }
+
+  
   catch (error) {
     res.status(500).json({
       success: false,
@@ -282,8 +302,7 @@ export const getFullCourseDetails = async (req, res) => {
 export const getInstructorCourses = async (req, res) => {
   try {
 
-    const instructorId = req.user.id                      // Get the instructor ID from the authenticated user or request body
-
+    const instructorId = req.user.id 
     // Find all courses belonging to the instructor
     const instructorCourses = await Course.find({ instructor: instructorId, }).sort({ createdAt: -1 })
 

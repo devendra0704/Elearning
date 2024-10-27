@@ -51,27 +51,27 @@ const Catalog = () => {
   return (
     <>
         {/* Hero Section */}
-        <div className=" box-content bg-richblack-800 px-4">
+        <div className=" box-content bg-[#1ABC9C] px-4">
             <div  className="mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ">
-                <p className="text-sm text-richblack-300">{`Home / Catalog /`}
-                <span className="text-yellow-25">
+                <p className="text-sm text-[#2C2C2C]">{`Home / Catalog /`}
+                <span className="text-[#E91E63]">
                     {catalogPageData?.data?.selectedCategory?.name}
                 </span></p>
-                <p className="text-3xl text-richblack-5"> {catalogPageData?.data?.selectedCategory?.name} </p>
-                <p className="max-w-[870px] text-richblack-200"> {catalogPageData?.data?.selectedCategory?.description}</p>
+                <p className="text-3xl text-black"> {catalogPageData?.data?.selectedCategory?.name} </p>
+                <p className="max-w-[870px] text-[#2C2C2C] pb-5"> {catalogPageData?.data?.selectedCategory?.description}</p>
             </div>
         </div>
 
        
             {/* section1 */}
-            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-            <div className="section_heading">Courses to get you started</div>
-                <div className="my-4 flex border-b border-b-richblack-600 text-sm">
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent ">
+            <div className="section_heading text-[#2C2C2C]">Courses to get you started</div>
+                <div className="my-4 flex border-b border-b-[#8E44AD] text-s">
                     <p
                        className={`px-4 py-2 ${
                         active === 1
-                            ? "border-b border-b-yellow-25 text-yellow-25"
-                            : "text-richblack-50"
+                            ? "border-b border-b-[#8E44AD] text-[#8E44AD]"
+                            : "text-[#2C2C2C]"
                         } cursor-pointer`}
                         onClick={() => setActive(1)}
                     >
@@ -79,8 +79,8 @@ const Catalog = () => {
                     <p
                     className={`px-4 py-2 ${
                         active === 2
-                            ? "border-b border-b-yellow-25 text-yellow-25"
-                            : "text-richblack-50"
+                            ? "border-b border-b-[#8E44AD] text-[#8E44AD]"
+                            : "text-[#2C2C2C]"
                         } cursor-pointer`}
                         onClick={() => setActive(2)}
                     >
@@ -94,8 +94,8 @@ const Catalog = () => {
             </div>  
 
             {/* section2 */}
-            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-                <div className="section_heading">Top Courses in {catalogPageData?.data?.differentCategory?.name}</div>
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent text-black">
+                <div className="section_heading text-[#2C2C2C]">Top Courses in {catalogPageData?.data?.differentCategory?.name}</div>
                     <div className="py-8">
                         <CourseSlider Courses={catalogPageData?.data?.differentCategory?.courses}/>
                     </div>
@@ -103,7 +103,7 @@ const Catalog = () => {
 
             {/* section3 */}
             <div  className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-                <div className="section_heading">Frequently Bought</div>
+                <div className="section_heading text-[#2C2C2C]">Frequently Bought</div>
                 <div className='py-8'>
                     <div className='grid grid-cols-1 gap-5 lg:grid-cols-3'>
                         {

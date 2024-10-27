@@ -38,11 +38,11 @@ export default function Instructor() {
   
     return (
       <div>
-        <div className="space-y-2">
-          <h1 className="text-2xl font-bold text-richblack-5">
+        <div className="space-y-2 text-[#2C2C2C]">
+          <h1 className="text-2xl font-bold ">
             Hi {user?.firstName} 👋
           </h1>
-          <p className="font-medium text-richblack-200">
+          <p className="font-medium ">
             Let's start something new
           </p>
         </div>

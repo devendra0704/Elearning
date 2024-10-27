@@ -7,7 +7,7 @@ import { fadeIn } from "../components/common/motionFrameVarients"
 const About = () => {
   return (
     <div>
-      <section className="bg-richblack-700">
+      <section className="bg-[#1ABC9C]">
         <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-white">
           <motion.header
             className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]"
@@ -26,7 +26,7 @@ const About = () => {
               initial='hidden'
               whileInView={'show'}
               viewport={{ once: false, amount: 0.1 }}
-              className="mx-auto mt-3 text-center text-base font-medium text-richblack-300 lg:w-[95%]">
+              className="mx-auto mt-3 text-center text-base font-medium text-white lg:w-[95%]">
               Studynotion is at the forefront of driving innovation in online
               education. We're passionate about creating a brighter future by
               offering cutting-edge courses, leveraging emerging technologies,
@@ -39,14 +39,14 @@ const About = () => {
       </section>
 
       <section className="border-b border-richblack-700">
-        <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-richblack-500">
+        <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-[#2C2C2C]">
           <div className="h-[100px] "></div>
           <Quote />
         </div>
       </section>
 
 
-      <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white">
+      <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white border border-black bg-[#d0f8f0] rounded-xl p-7 lg:p-14">
         <ContactFormSection />
       </section>
     </div>

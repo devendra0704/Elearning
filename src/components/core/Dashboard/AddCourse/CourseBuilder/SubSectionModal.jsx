@@ -92,8 +92,8 @@ export default function SubSectionModal({
   }
 
   const onSubmit = async (data) => {
-    // console.log(data)
     if (view) return
+    // console.log("data.....",data)
 
     if (edit) {
       if (!isFormUpdated()) {

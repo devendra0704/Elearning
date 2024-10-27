@@ -141,12 +141,13 @@ export const createSection = async (data, token) => {
       throw new Error("Could Not Create Section")
     }
     toast.success("Course Section Created")
-    result = response?.data?.updatedCourse
+    result = response?.data?.updatedCourseDetails
   } catch (error) {
     console.log("CREATE SECTION API ERROR............", error)
     toast.error(error.message)
   }
   toast.dismiss(toastId)
+  // console.log("section api....",result);
   return result
 }
 
@@ -154,6 +155,10 @@ export const createSection = async (data, token) => {
 export const createSubSection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
+  console.log("subsection_data...",data);
+  // for (const value of data.values()) {
+  //   console.log(value);
+  // }
   try {
     const response = await apiConnector("POST", CREATE_SUBSECTION_API, data, {
       Authorization: `Bearer ${token}`,

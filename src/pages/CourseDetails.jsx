@@ -25,11 +25,11 @@ function CourseDetails() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // Getting courseId from url parameter
+ 
   const { courseId } = useParams()
   // console.log(`course id: ${courseId}`)
 
-  // Declear a state to save the course details
+
   const [response, setResponse] = useState(null)
   const [confirmationModal, setConfirmationModal] = useState(null)
   useEffect(() => {
@@ -63,11 +63,11 @@ function CourseDetails() {
     setIsActive(
       !isActive.includes(id)
         ? isActive.concat([id])
-        : isActive.filter((e) => e != id)
+        : isActive.filter((e) => e !== id)
     )
   }
 
-  // Total number of lectures
+ 
   const [totalNoOfLectures, setTotalNoOfLectures] = useState(0)
   useEffect(() => {
     let lectures = 0
@@ -150,7 +150,7 @@ function CourseDetails() {
               </div>
               <p className={`text-richblack-200`}>{courseDescription}</p>
               <div className="text-md flex flex-wrap items-center gap-2">
-                <span className="text-yellow-25">{avgReviewCount}</span>
+                <span className="text-[#E91E63]">{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
                 <span>{`(${ratingAndReviews.length} reviews)`}</span>
                 <span>{`${studentsEnrolled.length} students enrolled`}</span>
@@ -175,7 +175,7 @@ function CourseDetails() {
               <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
                 Rs. {price}
               </p>
-              <button className="yellowButton" onClick={handleBuyCourse}>
+              <button className="yellowButton bg-[#E91E63]" onClick={handleBuyCourse}>
                 Buy Now
               </button>
               <button className="blackButton">Add to Cart</button>
@@ -192,7 +192,7 @@ function CourseDetails() {
         </div>
        
       </div>
-      <div className="mx-auto box-content px-4 text-start text-richblack-5 lg:w-[1260px]">
+      <div className="mx-auto box-content px-4 text-start text-[#2C2C2C] lg:w-[1260px]">
         <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
           {/* What will you learn section */}
           <div className="my-8 border border-richblack-600 p-8">
@@ -205,7 +205,7 @@ function CourseDetails() {
           {/* Course Content Section */}
           <div className="max-w-[830px] ">
             <div className="flex flex-col gap-3">
-              <p className="text-[28px] font-semibold">Course Content</p>
+              <p className="text-[28px] font-bold">Course Content</p>
               <div className="flex flex-wrap justify-between gap-2">
                 <div className="flex gap-2">
                   <span>
@@ -218,7 +218,7 @@ function CourseDetails() {
                 </div>
                 <div>
                   <button
-                    className="text-yellow-25"
+                    className="text-[#27AE60]"
                     onClick={() => setIsActive([])}
                   >
                     Collapse all sections
@@ -247,7 +247,7 @@ function CourseDetails() {
                   src={
                     instructor.image
                       ? instructor.image
-                      : `https://api.dicebear.com/5.x/initials/svg?seed=${instructor.firstName} ${instructor.lastName}`
+                      : `https://api.dicebear.com/9.x/initials/svg?seed=${instructor.firstName} ${instructor.lastName}`
                   }
                   alt="Author"
                   className="h-14 w-14 rounded-full object-cover"

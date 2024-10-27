@@ -1,4 +1,4 @@
-export const passwordUpdated = (email, name) => {
+const passwordUpdated = (email, name) => {
 	return `<!DOCTYPE html>
     <html>
     
@@ -71,3 +71,5 @@ export const passwordUpdated = (email, name) => {
     
     </html>`;
 };
+
+export default passwordUpdated;

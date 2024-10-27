@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-
 import CountryCode from "../../data/countrycode.json"
 //import { apiConnector } from "../../services/apiconnector"
 //import { contactusEndpoint } from "../../services/apis"
@@ -50,7 +49,7 @@ const ContactUsForm = () => {
     >
       <div className="flex flex-col gap-5 lg:flex-row">
         <div className="flex flex-col gap-2 lg:w-[48%]">
-          <label htmlFor="firstname" className="lable-style">
+          <label htmlFor="firstname" className="lable-style  text-[0.975rem] leading-[1.375rem] text-[#2C2C2C]">
             First Name
           </label>
           <input
@@ -58,17 +57,20 @@ const ContactUsForm = () => {
             name="firstname"
             id="firstname"
             placeholder="Enter first name"
-            className="form-style"
+            style={{
+              boxShadow: "inset 0px -1px 6px rgb(44 44 44 / var(--tw-text-opacity))",
+            }}
+            className="w-full rounded-[0.5rem] bg-[#FDFEFE] p-[12px] text-[#2C2C2C]"
             {...register("firstname", { required: true })}
           />
           {errors.firstname && (
-            <span className="-mt-1 text-[12px] text-yellow-100">
+            <span className="-mt-1 text-[15px] text-[#E91E63]">
               Please enter your name.
             </span>
           )}
         </div>
         <div className="flex flex-col gap-2 lg:w-[48%]">
-          <label htmlFor="lastname" className="lable-style">
+          <label htmlFor="lastname" className="lable-style text-[0.975rem] leading-[1.375rem] text-[#2C2C2C]">
             Last Name
           </label>
           <input
@@ -76,14 +78,17 @@ const ContactUsForm = () => {
             name="lastname"
             id="lastname"
             placeholder="Enter last name"
-            className="form-style"
+            style={{
+              boxShadow: "inset 0px -1px 6px rgb(44 44 44 / var(--tw-text-opacity))",
+            }}
+            className="w-full rounded-[0.5rem] bg-[#FDFEFE] p-[12px] text-[#2C2C2C]"
             {...register("lastname")}
           />
         </div>
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="lable-style">
+        <label htmlFor="email" className="lable-style text-[0.975rem] leading-[1.375rem] text-[#2C2C2C]">
           Email Address
         </label>
         <input
@@ -91,18 +96,21 @@ const ContactUsForm = () => {
           name="email"
           id="email"
           placeholder="Enter email address"
-          className="form-style"
+          style={{
+            boxShadow: "inset 0px -1px 6px rgb(44 44 44 / var(--tw-text-opacity))",
+          }}
+          className="w-full rounded-[0.5rem] bg-[#FDFEFE] p-[12px] text-[#2C2C2C]"
           {...register("email", { required: true })}
         />
         {errors.email && (
-          <span className="-mt-1 text-[12px] text-yellow-100">
+          <span className="-mt-1 text-[15px] text-[#E91E63]">
             Please enter your Email address.
           </span>
         )}
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="phonenumber" className="lable-style">
+        <label htmlFor="phonenumber" className="lable-style text-[0.975rem] leading-[1.375rem] text-[#2C2C2C]">
           Phone Number
         </label>
 
@@ -113,7 +121,10 @@ const ContactUsForm = () => {
               name="firstname"
               id="firstname"
               placeholder="Enter first name"
-              className="form-style"
+              style={{
+                boxShadow: "inset 0px -1px 6px rgb(44 44 44 / var(--tw-text-opacity))",
+              }}
+              className="w-full rounded-[0.5rem] bg-[#FDFEFE] p-[12px] text-[#2C2C2C]"
               {...register("countrycode", { required: true })}
             >
               {CountryCode.map((ele, i) => {
@@ -131,7 +142,10 @@ const ContactUsForm = () => {
               name="phonenumber"
               id="phonenumber"
               placeholder="12345 67890"
-              className="form-style"
+              style={{
+                boxShadow: "inset 0px -1px 6px rgb(44 44 44 / var(--tw-text-opacity))",
+              }}
+              className="w-full rounded-[0.5rem] bg-[#FDFEFE] p-[12px] text-[#2C2C2C]"
               {...register("phoneNo", {
                 required: {
                   value: true,
@@ -144,14 +158,14 @@ const ContactUsForm = () => {
           </div>
         </div>
         {errors.phoneNo && (
-          <span className="-mt-1 text-[12px] text-yellow-100">
+          <span className="-mt-1 text-[15px] text-[#E91E63]">
             {errors.phoneNo.message}
           </span>
         )}
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="message" className="lable-style">
+        <label htmlFor="message" className="lable-style text-[0.975rem] leading-[1.375rem] text-[#2C2C2C]">
           Message
         </label>
         <textarea
@@ -160,11 +174,14 @@ const ContactUsForm = () => {
           cols="30"
           rows="7"
           placeholder="Enter your message here"
-          className="form-style"
+          style={{
+            boxShadow: "inset 0px -1px 6px rgb(44 44 44 / var(--tw-text-opacity))",
+          }}
+          className="w-full rounded-[0.5rem] bg-[#FDFEFE] p-[12px] text-[#2C2C2C]"
           {...register("message", { required: true })}
         />
         {errors.message && (
-          <span className="-mt-1 text-[12px] text-yellow-100">
+          <span className="-mt-1 text-[15px] text-[#E91E63]">
             Please enter your Message.
           </span>
         )}
@@ -173,7 +190,7 @@ const ContactUsForm = () => {
       <button
         disabled={loading}
         type="submit"
-        className={`rounded-md bg-yellow-50 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] 
+        className={`rounded-md bg-[#E91E63] px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] 
          ${
            !loading &&
            "transition-all duration-200 hover:scale-95 hover:shadow-none"

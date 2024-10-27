@@ -28,7 +28,7 @@ export default function CourseBuilderForm() {
   const { course } = useSelector((state) => state.course)
   const { token } = useSelector((state) => state.auth)
   const [loading, setLoading] = useState(false)
-  const [editSectionName, setEditSectionName] = useState(null)
+  const [editSectionName, setEditSectionName] = useState(false)
   const dispatch = useDispatch()
 
   // handle form submission
@@ -36,7 +36,7 @@ export default function CourseBuilderForm() {
     // console.log(data);
     setLoading(true)
 
-    let result=null;
+    let result = null;
 
     if (editSectionName) {
       result = await updateSection(
@@ -57,8 +57,9 @@ export default function CourseBuilderForm() {
         token
       )
     }
+    console.log("section .............",result);
     if (result) {
-      // console.log("section result", result)
+      console.log("section result", result)
       dispatch(setCourse(result))
       setEditSectionName(null)
       setValue("sectionName", "")
@@ -129,6 +130,7 @@ export default function CourseBuilderForm() {
           >
             <IoAddCircleOutline size={20} className="text-yellow-50" />
           </IconBtn>
+
           {editSectionName && (
             <button
               type="button"
@@ -138,12 +140,16 @@ export default function CourseBuilderForm() {
               Cancel Edit
             </button>
           )}
+
         </div>
       </form>
-      {console.log("checkkkk.....",course.courseContent)}
+
+      {/* {console.log("checkkkk.....", course)} */}
+
       {course.courseContent.length > 0 && (
         <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
       )}
+
       {/* Next Prev Button */}
       <div className="flex justify-end gap-x-3">
         <button
